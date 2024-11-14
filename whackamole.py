@@ -1,24 +1,24 @@
 import pygame,random
+row = 20
+col = 16
+squaresize = 32
 
 def draw_grid(screen):
-    row = 20
-    col = 16
-    squaresize = 32
-    for i in range(col+1):
+    for i in range(col):
         pygame.draw.line(
             screen,
             "black",
             (i*squaresize,0),
             (i*squaresize,512),
-            2
+            1
         )
-    for i in range(row+1):
+    for i in range(row):
         pygame.draw.line(
             screen,
             "black",
             (0,i*squaresize),
             (640,i*squaresize),
-            2
+            1
 
         )
 
@@ -37,9 +37,16 @@ def main():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_x,mouse_y = event.pos
+
             screen.fill("light green")
             draw_grid(screen)
-            screen.blit(mole_image, mole_image.get_rect(topleft=(x, y))
+            x=0
+            y=0
+            #x = random.randrange(col)*squaresize
+            #y = random.randrange(row)*squaresize
+            screen.blit(mole_image, mole_image.get_rect(topleft=(x, y)))
             pygame.display.flip()
             clock.tick(60)
     finally:
